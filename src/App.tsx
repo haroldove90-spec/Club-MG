@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { AppProvider, useApp } from './context/AppContext';
 import { Header } from './components/common/Header';
 import { Sidebar } from './components/common/Sidebar';
-import { BottomBar } from './components/common/BottomBar';
 import { PWAInstallModal } from './components/common/PWAInstallModal';
 import { RoleSelectorHome } from './components/home/RoleSelectorHome';
 import { AdminDashboard } from './components/admin/AdminDashboard';
@@ -50,7 +49,7 @@ const MainAppLayout: React.FC = () => {
 
         {/* Dynamic Viewport */}
         <main
-          className={`flex-1 overflow-y-auto pb-24 lg:pb-12 ${
+          className={`flex-1 overflow-y-auto pb-8 lg:pb-12 ${
             activeRole ? 'p-3 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full' : ''
           }`}
         >
@@ -61,9 +60,6 @@ const MainAppLayout: React.FC = () => {
           {activeRole === 'compliance' && <STPSComplianceModule />}
         </main>
       </div>
-
-      {/* Mobile & Tablet Tactile Bottom Bar */}
-      {activeRole && <BottomBar />}
 
       {/* PWA Install Instructions Modal */}
       <PWAInstallModal

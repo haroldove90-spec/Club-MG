@@ -116,31 +116,16 @@ export const AccessControlModule: React.FC = () => {
           </p>
         </div>
 
-        {/* Sub-tabs buttons */}
-        <div className="flex items-center gap-1.5 p-1 bg-slate-100 rounded-xl overflow-x-auto max-w-full">
-          {[
-            { id: 'acceso-vivo', label: 'Face ID en Acceso', icon: ScanFace },
-            { id: 'monitor-display', label: 'Monitor de Bienvenida', icon: ShieldCheck },
-            { id: 'bitacora', label: 'Bitácora en Tiempo Real', icon: CheckCircle },
-            { id: 'asistencia-clases', label: 'Áreas & Clases', icon: User },
-          ].map((tab) => {
-            const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition whitespace-nowrap shrink-0 ${
-                  isActive
-                    ? 'bg-white text-emerald-700 shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
-                }`}
-              >
-                <Icon className="w-3.5 h-3.5" />
-                <span>{tab.label}</span>
-              </button>
-            );
-          })}
+        <div className="flex items-center gap-2">
+          <div className="hidden sm:flex flex-col text-right">
+            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Módulo Activo</span>
+            <span className="text-xs font-bold text-emerald-700 capitalize">
+              {activeTab === 'acceso-vivo' && 'Face ID en Acceso'}
+              {activeTab === 'monitor-display' && 'Monitor de Bienvenida'}
+              {activeTab === 'bitacora' && 'Bitácora en Tiempo Real'}
+              {activeTab === 'asistencia-clases' && 'Áreas & Clases'}
+            </span>
+          </div>
         </div>
       </div>
 

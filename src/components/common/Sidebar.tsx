@@ -15,7 +15,8 @@ import {
   ShieldCheck,
   CheckCircle,
   HelpCircle,
-  RotateCcw
+  RotateCcw,
+  LogOut
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 
@@ -32,9 +33,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
   isOpenMobile,
   onCloseMobile,
 }) => {
-  const { activeRole, activeTab, setActiveTab, resetToDefaults } = useApp();
+  const { activeRole, setActiveRole, activeTab, setActiveTab, resetToDefaults } = useApp();
 
   if (!activeRole) return null;
+
+  const roleLabels: Record<string, string> = {
+    admin: 'Dirección / Admin',
+    instructor: 'Instructor / Docente',
+    member: 'Alumno / Socio',
+    compliance: 'Normativa STPS',
+  };
 
   // Nav items configured per role
   const getNavItems = () => {
@@ -98,20 +106,48 @@ export const Sidebar: React.FC<SidebarProps> = ({
         } ${isOpenMobile ? 'translate-x-0 w-72 shadow-2xl' : '-translate-x-full lg:translate-x-0'}`}
       >
         {/* Navigation list */}
-        <div className="flex-1 overflow-y-auto py-4 px-3 space-y-1">
-          <div className="px-2 mb-2 flex items-center justify-between">
+        <div className="flex-1 overflow-y-auto py-3 px-3 space-y-1">
+          {/* Active Role Card & Exit button */}
+          <div className="mb-3 p-2 bg-slate-50 border border-slate-200 rounded-xl">
+            <div className="flex items-center justify-between gap-1 mb-1.5">
+              {!collapsed && (
+                <div className="overflow-hidden">
+                  <div className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+                    Rol en Sesión
+                  </div>
+                  <div className="text-xs font-bold text-slate-800 truncate">
+                    {roleLabels[activeRole]}
+                  </div>
+                </div>
+              )}
+              <button
+                onClick={onToggleCollapse}
+                className="hidden lg:flex items-center justify-center p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200/60 transition ml-auto shrink-0"
+                title={collapsed ? 'Expandir barra lateral' : 'Colapsar barra lateral'}
+              >
+                {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+              </button>
+            </div>
+
+            <button
+              onClick={() => {
+                setActiveRole(null);
+                onCloseMobile();
+              }}
+              className="w-full flex items-center justify-center gap-1.5 py-1.5 px-2 bg-rose-50 hover:bg-rose-100 active:bg-rose-200 text-rose-700 border border-rose-200 rounded-lg text-[11px] font-bold transition shadow-2xs cursor-pointer"
+              title="Cerrar sesión actual para ir a otros roles"
+            >
+              <LogOut className="w-3.5 h-3.5 shrink-0 text-rose-600" />
+              {!collapsed && <span>Cerrar Sesión</span>}
+            </button>
+          </div>
+
+          <div className="px-2 mb-1">
             {!collapsed && (
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                Módulos del Rol
+                Módulos del Sistema
               </span>
             )}
-            <button
-              onClick={onToggleCollapse}
-              className="hidden lg:flex items-center justify-center p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition ml-auto"
-              title={collapsed ? 'Expandir barra lateral' : 'Colapsar barra lateral'}
-            >
-              {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
-            </button>
           </div>
 
           {navItems.map((item) => {
@@ -155,6 +191,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
               </p>
             </div>
           )}
+
+          <button
+            onClick={() => {
+              setActiveRole(null);
+              onCloseMobile();
+            }}
+            className="w-full flex items-center justify-center gap-1.5 py-2 px-2 bg-rose-600 hover:bg-rose-700 active:bg-rose-800 text-white rounded-xl text-xs font-bold transition shadow-xs cursor-pointer"
+            title="Cerrar sesión actual y cambiar a otro rol"
+          >
+            <LogOut className="w-3.5 h-3.5" />
+            {!collapsed && <span>Cerrar Sesión</span>}
+          </button>
 
           <button
             onClick={() => {

@@ -25,7 +25,6 @@ export const Header: React.FC<HeaderProps> = ({ onToggleSidebar, onOpenInstallMo
   const { activeRole, setActiveRole, notifications, markNotificationRead } = useApp();
   const { isOnline, isInstalled } = usePWA();
   const [showInstallModal, setShowInstallModal] = useState(false);
-  const [showRoleMenu, setShowRoleMenu] = useState(false);
   const [showNotifMenu, setShowNotifMenu] = useState(false);
 
   const handleInstall = () => {
@@ -40,26 +39,26 @@ export const Header: React.FC<HeaderProps> = ({ onToggleSidebar, onOpenInstallMo
 
   const roleMeta: Record<UserRole, { label: string; badgeBg: string; badgeText: string; icon: string }> = {
     admin: {
-      label: 'Dirección / Administración',
-      badgeBg: 'bg-blue-100 border-blue-300',
+      label: 'Dirección / Admin',
+      badgeBg: 'bg-blue-50 border-blue-200',
       badgeText: 'text-blue-900',
       icon: 'Gerencia y Recepción',
     },
     instructor: {
       label: 'Instructor / Docente',
-      badgeBg: 'bg-emerald-100 border-emerald-300',
+      badgeBg: 'bg-emerald-50 border-emerald-200',
       badgeText: 'text-emerald-900',
       icon: 'Control de Acceso / Torniquete',
     },
     member: {
       label: 'Alumno / Socio',
-      badgeBg: 'bg-indigo-100 border-indigo-300',
+      badgeBg: 'bg-indigo-50 border-indigo-200',
       badgeText: 'text-indigo-900',
       icon: 'Portal Web & QR Dinámico',
     },
     compliance: {
-      label: 'Normativa STPS / CONOCER',
-      badgeBg: 'bg-amber-100 border-amber-300',
+      label: 'Normativa STPS',
+      badgeBg: 'bg-amber-50 border-amber-200',
       badgeText: 'text-amber-900',
       icon: 'Auditoría y Certificaciones',
     },
@@ -142,45 +141,16 @@ export const Header: React.FC<HeaderProps> = ({ onToggleSidebar, onOpenInstallMo
                 </button>
               )}
 
-              {/* Active Role Selector / Badge */}
+              {/* Active Role Indicator (Separated Roles) */}
               {activeRole && (
-                <div className="relative">
-                  <button
-                    onClick={() => setShowRoleMenu(!showRoleMenu)}
-                    className={`flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 rounded-xl border text-xs font-semibold shadow-xs transition hover:brightness-95 ${roleMeta[activeRole].badgeBg} ${roleMeta[activeRole].badgeText}`}
-                  >
-                    <UserCheck className="w-3.5 h-3.5 shrink-0" />
-                    <span className="max-w-[70px] xs:max-w-[110px] sm:max-w-none truncate font-bold">
-                      {roleMeta[activeRole].label}
-                    </span>
-                    <ChevronDown className="w-3.5 h-3.5 opacity-70 shrink-0" />
-                  </button>
-
-                  {showRoleMenu && (
-                    <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-slate-200 py-2 z-50 text-xs text-slate-700 animate-in fade-in zoom-in-95 duration-100">
-                      <div className="px-3 py-1.5 font-bold uppercase tracking-wider text-[10px] text-slate-400 border-b border-slate-100 mb-1">
-                        Cambiar Rol Activo
-                      </div>
-                      {(['admin', 'instructor', 'member', 'compliance'] as UserRole[]).map((role) => (
-                        <button
-                          key={role}
-                          onClick={() => {
-                            setActiveRole(role);
-                            setShowRoleMenu(false);
-                          }}
-                          className={`w-full text-left px-3 py-2 flex items-center justify-between hover:bg-slate-50 transition ${
-                            activeRole === role ? 'font-bold text-blue-700 bg-blue-50/60' : ''
-                          }`}
-                        >
-                          <div>
-                            <div className="text-slate-900">{roleMeta[role].label}</div>
-                            <div className="text-[10px] text-slate-400">{roleMeta[role].icon}</div>
-                          </div>
-                          {activeRole === role && <CheckCircle2 className="w-4 h-4 text-blue-600" />}
-                        </button>
-                      ))}
-                    </div>
-                  )}
+                <div
+                  className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl border text-xs font-bold shadow-xs ${roleMeta[activeRole].badgeBg} ${roleMeta[activeRole].badgeText}`}
+                  title={`Rol activo: ${roleMeta[activeRole].label}`}
+                >
+                  <UserCheck className="w-3.5 h-3.5 shrink-0" />
+                  <span className="max-w-[100px] xs:max-w-[140px] sm:max-w-none truncate">
+                    {roleMeta[activeRole].label}
+                  </span>
                 </div>
               )}
 
@@ -226,15 +196,15 @@ export const Header: React.FC<HeaderProps> = ({ onToggleSidebar, onOpenInstallMo
                 )}
               </div>
 
-              {/* Exit / Logout Button */}
+              {/* Active Logout / Exit Button to switch roles */}
               {activeRole && (
                 <button
                   onClick={() => setActiveRole(null)}
-                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-slate-600 hover:text-rose-700 hover:bg-rose-50 transition text-xs font-semibold"
-                  title="Cerrar sesión / Salir al menú principal"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 active:bg-rose-200 text-rose-700 border border-rose-200 hover:border-rose-300 transition text-xs font-bold shadow-xs cursor-pointer"
+                  title="Cerrar sesión actual y volver al selector de roles"
                 >
-                  <LogOut className="w-4 h-4" />
-                  <span className="hidden md:inline">Salir</span>
+                  <LogOut className="w-3.5 h-3.5 shrink-0 text-rose-600" />
+                  <span className="whitespace-nowrap">Cerrar Sesión</span>
                 </button>
               )}
 

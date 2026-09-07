@@ -57,31 +57,16 @@ export const STPSComplianceModule: React.FC = () => {
           </p>
         </div>
 
-        {/* Sub-tab pills */}
-        <div className="flex items-center gap-1.5 p-1 bg-amber-50/80 rounded-xl border border-amber-200 overflow-x-auto max-w-full">
-          {[
-            { id: 'dc3', label: 'Formato DC-3 Oficial', icon: Award },
-            { id: 'conocer', label: 'Estándares CONOCER', icon: BookOpen },
-            { id: 'matriz-empleados', label: 'Matriz 25 Empleados', icon: Briefcase },
-            { id: 'seguridad-higiene', label: 'Auditoría NOMs STPS', icon: ShieldCheck },
-          ].map((tab) => {
-            const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition whitespace-nowrap shrink-0 ${
-                  isActive
-                    ? 'bg-amber-600 text-white shadow-xs'
-                    : 'text-amber-950 hover:bg-amber-100/60'
-                }`}
-              >
-                <Icon className="w-3.5 h-3.5" />
-                <span>{tab.label}</span>
-              </button>
-            );
-          })}
+        <div className="flex items-center gap-2">
+          <div className="hidden sm:flex flex-col text-right">
+            <span className="text-[10px] uppercase font-bold text-amber-700 tracking-wider">Módulo Activo</span>
+            <span className="text-xs font-bold text-amber-950 capitalize">
+              {activeTab === 'dc3' && 'Formato DC-3 Oficial'}
+              {activeTab === 'conocer' && 'Estándares CONOCER'}
+              {activeTab === 'matriz-empleados' && 'Matriz 25 Colaboradores'}
+              {activeTab === 'seguridad-higiene' && 'Auditoría NOMs STPS'}
+            </span>
+          </div>
         </div>
       </div>
 

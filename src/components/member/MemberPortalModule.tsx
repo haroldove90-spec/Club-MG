@@ -101,33 +101,6 @@ export const MemberPortalModule: React.FC = () => {
         </div>
       </div>
 
-      {/* Sub-tab navigation */}
-      <div className="flex items-center gap-2 border-b border-slate-200 pb-2 overflow-x-auto max-w-full">
-        {[
-          { id: 'credencial', label: 'Credencial Digital con QR', icon: QrCode },
-          { id: 'estado-cuenta', label: 'Estado de Cuenta & Pagos', icon: CreditCard },
-          { id: 'notificaciones', label: 'Notificaciones & Recordatorios', icon: Bell },
-          { id: 'historial-visitas', label: 'Mis Asistencias', icon: Clock },
-        ].map((tab) => {
-          const Icon = tab.icon;
-          const isActive = activeTab === tab.id;
-          return (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold transition whitespace-nowrap shrink-0 ${
-                isActive
-                  ? 'bg-indigo-600 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
-              }`}
-            >
-              <Icon className="w-4 h-4" />
-              <span>{tab.label}</span>
-            </button>
-          );
-        })}
-      </div>
-
       {/* ========================================================================= */}
       {/* 1. CREDENCIAL DIGITAL CON QR DINÁMICO (30S REFRESH)                       */}
       {/* ========================================================================= */}

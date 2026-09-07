@@ -298,33 +298,18 @@ export const AdminDashboard: React.FC = () => {
           </p>
         </div>
 
-        {/* Quick Tabs buttons for fast switching without duplicate horizontal bars */}
-        <div className="flex items-center gap-1.5 p-1 bg-slate-100 rounded-xl overflow-x-auto max-w-full">
-          {[
-            { id: 'socios', label: 'Socios (CRUD)', icon: Users },
-            { id: 'biometria', label: 'Face ID', icon: Camera },
-            { id: 'pos', label: 'Punto de Venta', icon: CreditCard },
-            { id: 'recibos', label: 'Recibos', icon: FileText },
-            { id: 'empleados', label: '25 Empleados', icon: Briefcase },
-            { id: 'reportes', label: 'Reportes & Caja', icon: BarChart3 },
-          ].map((tab) => {
-            const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition whitespace-nowrap shrink-0 ${
-                  isActive
-                    ? 'bg-white text-blue-700 shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
-                }`}
-              >
-                <Icon className="w-3.5 h-3.5" />
-                <span>{tab.label}</span>
-              </button>
-            );
-          })}
+        <div className="flex items-center gap-2">
+          <div className="hidden sm:flex flex-col text-right">
+            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Módulo Activo</span>
+            <span className="text-xs font-bold text-blue-700 capitalize">
+              {activeTab === 'socios' && 'Gestión de Socios'}
+              {activeTab === 'biometria' && 'Registro Facial'}
+              {activeTab === 'pos' && 'Punto de Venta'}
+              {activeTab === 'recibos' && 'Comprobantes'}
+              {activeTab === 'empleados' && 'Plantilla de Personal'}
+              {activeTab === 'reportes' && 'Reportes Financieros'}
+            </span>
+          </div>
         </div>
       </div>
 
