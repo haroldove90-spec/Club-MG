@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <rect width="100" height="100" rx="22" fill="#0f172a" />
+  <!-- Shield outline in institutional blue -->
+  <path d="M50 14L22 26V48C22 66 34 82 50 88C66 82 78 66 78 48V26L50 14Z" stroke="#2563eb" stroke-width="4" fill="#1e293b" />
+  <!-- Biometric Face scan corners -->
+  <path d="M38 38H34V42" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M62 38H66V42" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M34 58V62H38" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M66 58V62H62" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Checkmark / Approval pulse in emerald green -->
+  <path d="M42 50L48 56L58 44" stroke="#22c55e" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- Center biometric dot -->
+  <circle cx="50" cy="36" r="2" fill="#38bdf8" />
+</svg>

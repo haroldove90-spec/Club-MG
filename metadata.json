@@ -1,0 +1,6 @@
+{
+  "name": "Club MG",
+  "description": "Sistema integral de control de acceso por reconocimiento facial biométrico (Face ID), cobros POS, administración operativa y normativa STPS/CONOCER para Club MG.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
